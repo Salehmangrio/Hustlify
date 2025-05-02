@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string().min(3, "Too Short!").required("Required"),
@@ -27,7 +28,7 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-10vh)] flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4">
+    <div className="min-h-[calc(100vh-8vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
       <div ref={formRef} className="w-full max-w-md">
         <div className="rounded-2xl shadow-2xl bg-[#0f172a] border-none text-white">
           <div className="p-8">
@@ -105,7 +106,7 @@ export default function Login() {
                   </div>
 
                   <p className="text-sm text-center text-gray-400 mt-6">
-                    Don't have an account? <a href="#" className="text-indigo-400 hover:underline">Create New Account</a>
+                    Don't have an account? <Link to={"/register"} className="text-indigo-400 hover:underline">Create New Account</Link>
                   </p>
                 </Form>
               )}
