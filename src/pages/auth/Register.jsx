@@ -1,23 +1,17 @@
 import { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { Mail, Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { Link } from "react-router-dom";
-const RegisterSchema = Yup.object().shape({
-  username: Yup.string().min(3, "Too Short!").required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(6, "Too Short!").required("Required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Required"),
-});
+import { Link, useNavigate } from "react-router-dom";
+import { RegisterSchema } from '../../utils/validators'
+import { handleRegisterSubmit } from "../../utils/users";
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   const formRef = useRef(null);
 
   useGSAP(() => {
@@ -30,6 +24,8 @@ export default function Register() {
     }
   }, []);
 
+  let initialValues = { username: "", email: "", password: "", confirmPassword: "" }
+
   return (
     <div className="min-h-[calc(100vh-10vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
       <div ref={formRef} className="w-full max-w-md">
@@ -37,17 +33,11 @@ export default function Register() {
           <div className="p-8">
             <h2 className="md:text-3xl text-lg font-bold text-center mb-6 text-white">Create Your Hustlify Account</h2>
             <Formik
-              initialValues={{ username: "", email: "", password: "", confirmPassword: "" }}
+              initialValues={initialValues}
               validationSchema={RegisterSchema}
-              onSubmit={(values) => {
-                setLoading(true);
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setLoading(false);
-                }, 1500);
-              }}
+              onSubmit={(values) => handleRegisterSubmit(values, setLoading,navigate)}
             >
-              {({ errors, touched }) => (
+              {() => (
                 <Form className="space-y-5">
                   <div>
                     <label className="text-sm mb-1 block">Username</label>
@@ -56,7 +46,7 @@ export default function Register() {
                       <Field
                         name="username"
                         type="text"
-                        placeholder="your_username"
+                        placeholder="username"
                         className="pl-10 w-full py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
@@ -74,7 +64,7 @@ export default function Register() {
                       <Field
                         name="email"
                         type="email"
-                        placeholder="your_email@example.com"
+                        placeholder="email@example.com"
                         className="pl-10 w-full py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
