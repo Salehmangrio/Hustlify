@@ -29,7 +29,7 @@ export default function Register() {
   return (
     <div className="min-h-[calc(100vh-10vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
       <div ref={formRef} className="w-full max-w-md">
-        <div className="rounded-2xl shadow-2xl bg-[#0f172a] border-none text-white">
+        <div className="rounded-2xl shadow-2xl bg-[#0f172a] border-none text-white mt-4">
           <div className="p-8">
             <h2 className="md:text-3xl text-lg font-bold text-center mb-6 text-white">Create Your Hustlify Account</h2>
             <Formik
