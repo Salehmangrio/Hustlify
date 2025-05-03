@@ -1,20 +1,18 @@
 import { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Mail, Lock, User } from "lucide-react";
+import { Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { Link } from "react-router-dom";
-
-const LoginSchema = Yup.object().shape({
-  username: Yup.string().min(3, "Too Short!").required("Required"),
-  password: Yup.string().min(6, "Too Short!").required("Required"),
-});
+import { Link, useNavigate } from "react-router-dom";
+import { LoginSchema } from "../../utils/validators";
+import { LoginWith } from "../../components";
+import { handleLoginSubmit } from "../../utils/users";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   const formRef = useRef(null);
 
   useGSAP(() => {
@@ -36,13 +34,7 @@ export default function Login() {
             <Formik
               initialValues={{ username: "", password: "" }}
               validationSchema={LoginSchema}
-              onSubmit={(values) => {
-                setLoading(true);
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setLoading(false);
-                }, 1500);
-              }}
+              onSubmit={(values) => handleLoginSubmit(values, setLoading,navigate)}
             >
               {({ errors, touched }) => (
                 <Form className="space-y-5">
@@ -92,17 +84,11 @@ export default function Login() {
                   >
                     {loading ? "Logging in..." : "Login"}
                   </button>
-
-                  <div className="flex flex-col gap-3 mt-4">
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FcGoogle size={20} /> Continue with Google
-                    </button>
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FaGithub size={20} /> Continue with GitHub
-                    </button>
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FaLinkedin size={20} /> Continue with LinkedIn
-                    </button>
+                  <p className="text-center text-gray-100">or</p>
+                  <div className="flex flex-col gap-3 mt-1">
+                    <LoginWith Icon={FcGoogle} title={`Continue with Google`} />
+                    <LoginWith Icon={FaGithub} title={`Continue with GitHub`} />
+                    <LoginWith Icon={FaLinkedin} title={`Continue with LinkedIn`} />
                   </div>
 
                   <p className="text-sm text-center text-gray-400 mt-6">
@@ -114,6 +100,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

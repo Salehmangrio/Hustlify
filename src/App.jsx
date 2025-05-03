@@ -5,16 +5,18 @@ import {
   RouterProvider,
   Route
 } from 'react-router-dom'
-import { MainLayout } from './layouts'
-import { Login, Register } from './pages'
+import { MainLayout, ProtectedLayout } from './layouts'
+import { Dashboard, Login, Register } from './pages'
 
 const App = () => {
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />} >
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
+        <Route element={<ProtectedLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
       </Route>
     )
   )
