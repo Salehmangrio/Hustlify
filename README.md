@@ -16,7 +16,7 @@ npm install
 npm run dev
 ```
 
-## 📦 Packages used in this project
+# 📦 Packages used in this project
 - The following packages are used in this project:
 
 ```bash
