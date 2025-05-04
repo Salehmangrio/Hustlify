@@ -1,12 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { AuthProvider } from '../context/AuthContext'
 
 
 const MainLayout = () => {
     return (
-        <div>
+        <AuthProvider>
             <Outlet />
-        </div>
+        </AuthProvider>
     )
 }
 
