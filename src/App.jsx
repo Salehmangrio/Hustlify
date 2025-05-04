@@ -26,7 +26,7 @@ const App = () => {
           <Route path='chat' element={<ChatList />}>
             <Route path=':id' element={<ChatRoom />} />
           </Route>
-          <Route path="order" element={<Order/>}/>
+          <Route path="order" element={<Orders/>}/>
           <Route path="order/:id" element={<OrderDetails/>}/>
 
         </Route>
