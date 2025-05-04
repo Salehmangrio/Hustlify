@@ -4,11 +4,11 @@ import { Mail, Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { RegisterSchema } from '../../utils/validators'
 import { useAuth } from "../../context/AuthContext";
 import { LoginWith } from "../../components";
+import {animateFromTo} from '../../utils/animation'
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
