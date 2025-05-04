@@ -1,40 +1,37 @@
-import { useRef, useState } from "react";
+import {useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { LoginSchema } from "../../utils/validators";
 import { LoginWith } from "../../components";
-import { handleLoginSubmit } from "../../utils/users";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
-  const formRef = useRef(null);
+  const{ handleLogin }= useAuth()
 
   useGSAP(() => {
-    if (formRef.current) {
       gsap.fromTo(
-        formRef.current,
+        '#login-form',
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
       );
-    }
   }, []);
 
   return (
     <div className="min-h-[calc(100vh-8vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
-      <div ref={formRef} className="w-full max-w-md">
+      <div id="login-form" className=" w-full max-w-md">
         <div className="rounded-2xl shadow-2xl bg-[#0f172a] border-none text-white mt-4">
           <div className="p-8">
             <h2 className="md:text-3xl text-lg font-bold text-center mb-6 text-white">Welcome Back to Hustlify</h2>
             <Formik
               initialValues={{ username: "", password: "" }}
               validationSchema={LoginSchema}
-              onSubmit={(values) => handleLoginSubmit(values, setLoading,navigate)}
+              onSubmit={(values) => handleLogin(values, setLoading)}
             >
               {() => (
                 <Form className="space-y-5">
@@ -45,7 +42,7 @@ export default function Login() {
                       <Field
                         name="username"
                         type="text"
-                        placeholder="your_username"
+                        placeholder="username"
                         className="pl-10 w-full py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
@@ -84,7 +81,7 @@ export default function Login() {
                   >
                     {loading ? "Logging in..." : "Login"}
                   </button>
-                  <p className="text-center text-gray-100">or</p>
+                  <p className="text-center text-gray-400">or login with</p>
                   <div className="flex flex-col gap-3 mt-1">
                     <LoginWith Icon={FcGoogle} title={`Continue with Google`} />
                     <LoginWith Icon={FaGithub} title={`Continue with GitHub`} />
