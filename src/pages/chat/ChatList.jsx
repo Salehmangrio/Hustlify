@@ -5,11 +5,10 @@ import { animateFromTo } from '../../utils/animation';
 import { Outlet, Link } from 'react-router-dom';
 
 const ChatList = () => {
-
   useGSAP(() => {
     animateFromTo('#chat-list')
   }, []);
-  
+
   return (
     <div className=" flex bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000]">
       <div id='chat-list' className="w-full max-w-md">
