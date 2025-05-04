@@ -15,11 +15,7 @@ export default function Register() {
   const {handleRegister} = useAuth();
 
   useGSAP(() => {
-      gsap.fromTo(
-        '#register-form',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-      );
+      animateFromTo('#register-form')
   }, []);
 
   let initialValues = { username: "", email: "", password: "", confirmPassword: "" }
