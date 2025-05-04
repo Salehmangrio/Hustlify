@@ -6,18 +6,19 @@ import {
   Route
 } from 'react-router-dom'
 import { MainLayout, ProtectedLayout } from './layouts'
-import { Dashboard, ForgotPassword, Login, Register } from './pages'
+import { Dashboard, ForgotPassword, Login, Register, NotFound } from './pages'
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />} >
         <Route path='login' element={<Login />} />
-        <Route path='forget' element={ <ForgotPassword/>} />
+        <Route path='forget' element={<ForgotPassword />} />
         <Route path='register' element={<Register />} />
         <Route element={<ProtectedLayout />}>
           <Route index element={<Dashboard />} />
         </Route>
+        <Route path='*' element={<NotFound />} />
       </Route>
     )
   )
