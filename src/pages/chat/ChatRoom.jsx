@@ -50,7 +50,7 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] flex justify-center items-center text-white ml-1">
+    <div className="h-[calc(100vh-60px)] bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] flex justify-center items-center text-white ml-1">
       <div id="chat-room" className="w-full h-full bg-[#0f172a] rounded-2xl shadow-xl flex flex-col overflow-hidden">
         {/* Header */}
         <div className="bg-[#1e293b] px-6 py-4 rounded-t-2xl border-b border-gray-700">
