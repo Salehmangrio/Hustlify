@@ -1,41 +1,39 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Mail, Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RegisterSchema } from '../../utils/validators'
-import { handleRegisterSubmit } from "../../utils/users";
+import { useAuth } from "../../context/AuthContext";
+import { LoginWith } from "../../components";
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
-  const formRef = useRef(null);
+  const {handleRegister} = useAuth();
 
   useGSAP(() => {
-    if (formRef.current) {
       gsap.fromTo(
-        formRef.current,
+        '#register-form',
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
       );
-    }
   }, []);
 
   let initialValues = { username: "", email: "", password: "", confirmPassword: "" }
 
   return (
     <div className="min-h-[calc(100vh-10vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
-      <div ref={formRef} className="w-full max-w-md">
+      <div id="register-form" className=" w-full max-w-md">
         <div className="rounded-2xl shadow-2xl bg-[#0f172a] border-none text-white mt-4">
           <div className="p-8">
             <h2 className="md:text-3xl text-lg font-bold text-center mb-6 text-white">Create Your Hustlify Account</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={RegisterSchema}
-              onSubmit={(values) => handleRegisterSubmit(values, setLoading,navigate)}
+              onSubmit={(values) => handleRegister(values, setLoading)}
             >
               {() => (
                 <Form className="space-y-5">
@@ -118,17 +116,11 @@ export default function Register() {
                   >
                     {loading ? "Registering..." : "Register"}
                   </button>
-
-                  <div className="flex flex-col gap-3 mt-4">
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FcGoogle size={20} /> Continue with Google
-                    </button>
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FaGithub size={20} /> Continue with GitHub
-                    </button>
-                    <button className="flex items-center gap-2 justify-center text-white border border-gray-600 py-2 rounded-lg hover:text-indigo-400 transition">
-                      <FaLinkedin size={20} /> Continue with LinkedIn
-                    </button>
+                  <p className="text-center text-gray-400">or login with</p>
+                  <div className="flex justify-center items-center gap-3 mt-4">
+                    <LoginWith Icon={FcGoogle}/>
+                    <LoginWith Icon={FaGithub}/>
+                    <LoginWith Icon={FaLinkedin}/>
                   </div>
 
                   <p className="text-sm text-center text-gray-400 mt-6">
