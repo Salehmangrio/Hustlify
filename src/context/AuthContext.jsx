@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
         setLoading(true);
         setTimeout(() => {
-            alert('User registered successfully!');
+            // alert('User registered successfully!');
             localStorage.setItem('isLogged', JSON.stringify(true));
             setIsLogged(true);
             setLoading(false);
