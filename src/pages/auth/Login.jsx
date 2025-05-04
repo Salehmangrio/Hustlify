@@ -4,22 +4,18 @@ import { Lock, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
 import { Link} from "react-router-dom";
 import { LoginSchema } from "../../utils/validators";
 import { LoginWith } from "../../components";
 import { useAuth } from "../../context/AuthContext";
+import { animateFromTo } from "../../utils/animation";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const{ handleLogin }= useAuth()
 
   useGSAP(() => {
-      gsap.fromTo(
-        '#login-form',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-      );
+      animateFromTo('#login-form')
   }, []);
 
   return (
