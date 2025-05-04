@@ -6,7 +6,7 @@ import {
   Route
 } from 'react-router-dom'
 import { MainLayout, ProtectedLayout } from './layouts'
-import { Dashboard, ForgotPassword, Login, Register, NotFound, ChatList, ChatRoom } from './pages'
+import { Dashboard, ForgotPassword, Login, Register, NotFound, ChatList, ChatRoom,Orders,OrderDetails} from './pages'
 
 const App = () => {
   const router = createBrowserRouter(
@@ -26,6 +26,8 @@ const App = () => {
           <Route path='chat' element={<ChatList />}>
             <Route path=':id' element={<ChatRoom />} />
           </Route>
+          <Route path="order" element={<Order/>}/>
+          <Route path="order/:id" element={<OrderDetails/>}/>
 
         </Route>
         <Route path='*' element={<NotFound />} />
