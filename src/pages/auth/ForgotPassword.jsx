@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Mail } from "lucide-react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
+
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { animateFromTo } from "../../utils/animation";
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -13,16 +14,9 @@ const ForgotPasswordSchema = Yup.object().shape({
 export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [sent,setSent]=useState(false);
-  const formRef = useRef(null);
 
   useGSAP(() => {
-    if (formRef.current) {
-      gsap.fromTo(
-        formRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-      );
-    }
+    animateFromTo('#forget-form')
   }, []);
 
   const initialValues = { email: "" };
@@ -38,7 +32,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-[calc(100vh-10vh)] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#000000] px-4 md:py-8">
-      <div ref={formRef} className="w-full max-w-md">
+      <div id="forget-form" className="w-full max-w-md">
         <div className="rounded-2xl shadow-2xl bg-[#0f172a] text-white mt-4">
           <div className="p-8">
             <h2 className="md:text-3xl text-lg font-bold text-center mb-6 text-white">
