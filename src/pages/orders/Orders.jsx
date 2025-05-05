@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 const statusOptions = ['All', 'Active', 'Delivered', 'Completed', 'Cancelled'];
 
 const ActiveOrders = () => {
-  const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
 
   const filteredOrders = Orders.filter(order =>
-    order.title.toLowerCase().includes(search.toLowerCase()) &&
     (filterStatus === 'All' || order.status === filterStatus)
   );
 
