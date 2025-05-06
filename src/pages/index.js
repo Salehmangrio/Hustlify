@@ -7,8 +7,10 @@ import ChatList from './chat/ChatList'
 import ChatRoom from './chat/ChatRoom'
 import Orders from './orders/Orders'
 import OrderDetails from './orders/OrderDetails'
+import ViewProfile from './profile/ViewProfile'
+import EditProfile from './profile/EditProfile' 
 
 export {
     Login, Register, Dashboard, ForgotPassword,
-    NotFound, ChatList,ChatRoom,Orders,OrderDetails
+    NotFound, ChatList,ChatRoom,Orders,OrderDetails,ViewProfile,EditProfile
 }
