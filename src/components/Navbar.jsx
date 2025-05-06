@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { FaUser } from 'react-icons/fa'
 
 const Navbar = () => {
     const activeStyle= (({isActive})=>isActive?'text-yellow-400 font-bold font-serif':'font-light font-mono')
@@ -11,6 +12,7 @@ const Navbar = () => {
                 <li><NavLink className={activeStyle} to={`register`}>Sign Up</NavLink></li>
                 <li><NavLink className={activeStyle} to={`order`}>Orders</NavLink></li>
                 <li><NavLink className={activeStyle} to={`chat`}>Chat</NavLink></li>
+                <li><NavLink className={activeStyle} to={`profile`}><FaUser size={18}/></NavLink></li>
             </ul>
         </div>
     )
