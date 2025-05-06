@@ -6,7 +6,7 @@ import {
   Route
 } from 'react-router-dom'
 import { MainLayout, ProtectedLayout } from './layouts'
-import { Dashboard, ForgotPassword, Login, Register, NotFound, ChatList, ChatRoom,Orders,OrderDetails} from './pages'
+import { Dashboard, ForgotPassword, Login, Register, NotFound, ChatList, ChatRoom,Orders,OrderDetails, ViewProfile, EditProfile} from './pages'
 
 const App = () => {
   const router = createBrowserRouter(
@@ -17,6 +17,8 @@ const App = () => {
         <Route path='login' element={<Login />} />
         <Route path='register' element={<Register />} />
         <Route path='forget' element={<ForgotPassword />} />
+        <Route path='profile' element={<ViewProfile />} />
+        <Route path='edit-profile' element={<EditProfile />} />
 
         {/* Protected Routes (Only Authorized can see content) */}
         <Route element={<ProtectedLayout />}>
